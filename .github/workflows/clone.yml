@@ -47,7 +47,9 @@ jobs:
         run: git checkout -b $WORKING_BRANCH
       - name: Clear existing project
         working-directory: target
-        run: rm -rf !(.devcontainer|.github|LICENSE|readme.md)
+        run: |
+          shopt -s extglob
+          rm -rf !(".devcontainer"|".github"|"LICENSE"|"readme.md")
       - name: Copy source to target
         run: cp -ra source/src/. target/
       - name: Change text content
